@@ -83,6 +83,20 @@
       "description": "Venmo, Pay Roommate for Rent",
       "category": "Housing",
       "amount": -975
+    },
+    {
+      "date": "2022-09-15",
+      "description": "Paycheck from Bob's Burgers",
+      "category": "Income",
+      "amount": "3000",
+      "id": 13
+    },
+    {
+      "date": "2022-09-13",
+      "description": "South by Southwest Quinoa Bowl at Fresh & Co",
+      "category": "Food",
+      "amount": "10.55",
+      "id": 14
     }
   ]
 }
