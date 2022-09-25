@@ -7,7 +7,7 @@ function Sort({sortTransactions}){
     function handleClick(e){
 
         const id = e.target.id       
-        // console.log("handleClick", e.target.id);
+        
         sortTransactions(id)
 
     }

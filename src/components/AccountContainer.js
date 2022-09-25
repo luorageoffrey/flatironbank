@@ -20,12 +20,11 @@ function AccountContainer() {
     .then(r=>r.json())
     .then((data)=>{      
 
-      console.log(data)
+      
 
       setTransactions(data)
-
+     
       
-      console.log("transactions",transactions)
       updateOnLoad(false)
 
     })
@@ -53,8 +52,7 @@ function AccountContainer() {
     .then(r=>r.json())
     .then((data)=>{      
 
-      console.log(data)
-
+     
       let newtransactions = data
       .filter((transaction)=>{
         if(transaction.description.startsWith(value)){
@@ -65,7 +63,7 @@ function AccountContainer() {
       setTransactions(newtransactions)
 
       
-      console.log("transactions",transactions)
+     
       updateOnLoad(false)
 
     })
@@ -80,17 +78,17 @@ function AccountContainer() {
 
     let tr = sortedtransactions.sort((a,b)=>{
 
-      console.log(param)
+     
 
       if(param === "cat"){
 
-        console.log("here 1",param)
+       
 
         return a.category.localeCompare(b.category)
 
       }else if(param === "des"){
 
-        console.log("here 2",param)
+        
 
         return a.description.localeCompare(b.description)
 
@@ -99,7 +97,7 @@ function AccountContainer() {
       }     
    )
 
-    console.log(tr)
+  
 
     updateTransactionList(tr)
 
@@ -112,8 +110,7 @@ function AccountContainer() {
       headers: {'Content-Type': 'application/json'},
     }).then().then((res)=>{
 
-      console.log("delete me", res);
-
+     
       let tr = transactions.filter((transaction)=>transaction.id !== id)
 
       updateTransactionList(tr)
