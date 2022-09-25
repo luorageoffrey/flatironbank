@@ -4,6 +4,7 @@ import Search from "./Search";
 import AddTransactionForm from "./AddTransactionForm";
 
 import image from "../images/loading.gif"
+import Sort from "./Sort";
 
 function AccountContainer() {
 
@@ -46,29 +47,6 @@ function AccountContainer() {
 
   function searchTransactions(value) {
 
-    // console.log("filter",value)
-
-    // console.log(transactions)
-
-    // if(value === "") {
-    //    console.log("was empty")
-    //   // setTransactions(transactions)
-    //   setSearchBarEmptyStatus(!searchBarEmptyStatus)
-    //   return
-
-    // }
-
-    // let newtransactions = transactions
-    // .filter((transaction)=>{
-    //   if(transaction.description.startsWith(value)){
-    //     return transaction
-    //   }
-    // })
-
-    // console.log(newtransactions)
-
-    // setTransactions(newtransactions)
-
     updateOnLoad(true)
 
     fetch('http://localhost:8001/transactions')
@@ -96,17 +74,71 @@ function AccountContainer() {
 
   }
 
+  function sortTransactions(param){
+
+    const sortedtransactions = [...transactions]
+
+    let tr = sortedtransactions.sort((a,b)=>{
+
+      console.log(param)
+
+      if(param === "cat"){
+
+        console.log("here 1",param)
+
+        return a.category.localeCompare(b.category)
+
+      }else if(param === "des"){
+
+        console.log("here 2",param)
+
+        return a.description.localeCompare(b.description)
+
+      }  
+
+      }     
+   )
+
+    console.log(tr)
+
+    updateTransactionList(tr)
+
+  }
+
+  function deleteTransaction(id){
+
+    fetch(`http://localhost:8001/transactions/${id}`, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    }).then().then((res)=>{
+
+      console.log("delete me", res);
+
+      let tr = transactions.filter((transaction)=>transaction.id !== id)
+
+      updateTransactionList(tr)
+
+
+
+    })
+  }
+
 
   return (
     <div>
       <Search searchTransactions = {searchTransactions}/>
       <AddTransactionForm addTransaction = {addTransaction} />
 
+      <Sort sortTransactions={sortTransactions}/>
+
       {/* <img src={image}></img> */}
 
-
-
-      { loading ? <img src={image} alt="loading"></img> : <TransactionsList transactions = {transactions}   updateTransactionList = {updateTransactionList} />}
+      { loading ? <img src={image} alt="loading"></img> : 
+        <TransactionsList 
+          transactions = {transactions}   
+          updateTransactionList = {updateTransactionList} 
+          deleteTransaction={deleteTransaction}
+        />}
       
     </div>
   );

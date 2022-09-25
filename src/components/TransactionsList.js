@@ -1,10 +1,10 @@
 import React from "react";
 import Transaction from "./Transaction";
 
-function TransactionsList({transactions, updateTransactionList}) {
+function TransactionsList({transactions, updateTransactionList, deleteTransaction}) {
 
   transactions = transactions.map((transaction)=>{
-    return <Transaction key={transaction.id} transaction={transaction} />
+    return <Transaction key={transaction.id} transaction={transaction} deleteTransaction = {deleteTransaction} />
   })
 
   return (
