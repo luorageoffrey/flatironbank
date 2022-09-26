@@ -1,15 +1,10 @@
 import React, {useEffect, useState} from "react";
 
-
-
 function Sort({sortTransactions}){
 
     function handleClick(e){
-
-        const id = e.target.id       
-        
+        const id = e.target.id              
         sortTransactions(id)
-
     }
 
     return <>

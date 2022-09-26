@@ -18,15 +18,10 @@ function AccountContainer() {
   useEffect(()=>{
     fetch('http://localhost:8001/transactions')
     .then(r=>r.json())
-    .then((data)=>{      
+    .then((data)=>{          
 
-      
-
-      setTransactions(data)
-     
-      
+      setTransactions(data)          
       updateOnLoad(false)
-
     })
   }, [searchBarEmptyStatus])
 
@@ -48,26 +43,22 @@ function AccountContainer() {
 
     updateOnLoad(true)
 
-    fetch('http://localhost:8001/transactions')
-    .then(r=>r.json())
-    .then((data)=>{      
+    if(value === ""){
+      setSearchBarEmptyStatus(!searchBarEmptyStatus)
 
-     
-      let newtransactions = data
-      .filter((transaction)=>{
-        if(transaction.description.startsWith(value)){
+    }
+
+   // console.log("fhjjdjd", value)
+
+    let newtransactions =  transactions.filter((transaction)=>{
+        if(transaction.description.toLwerCase().startsWith(value.toLwerCase())){
           return transaction
         }
     })
 
-      setTransactions(newtransactions)
-
-      
+    setTransactions(newtransactions)     
      
-      updateOnLoad(false)
-
-    })
-
+    updateOnLoad(false)
 
 
   }
@@ -76,29 +67,20 @@ function AccountContainer() {
 
     const sortedtransactions = [...transactions]
 
-    let tr = sortedtransactions.sort((a,b)=>{
+    let tr = sortedtransactions.sort((a,b)=>{     
 
-     
-
-      if(param === "cat"){
-
-       
+      if(param === "cat"){       
 
         return a.category.localeCompare(b.category)
 
-      }else if(param === "des"){
-
-        
+      }else if(param === "des"){        
 
         return a.description.localeCompare(b.description)
 
       }  
 
       }     
-   )
-
-  
-
+   ) 
     updateTransactionList(tr)
 
   }
@@ -115,11 +97,8 @@ function AccountContainer() {
 
       updateTransactionList(tr)
 
-
-
     })
   }
-
 
   return (
     <div>
